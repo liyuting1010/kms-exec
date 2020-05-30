@@ -1,0 +1,22 @@
+{
+  "name": "aws-training-yutingli-kms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kms.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/liyuting1010/kms-exec.git"
+  },
+  "author": "yutingli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liyuting1010/kms-exec/issues"
+  },
+  "homepage": "https://github.com/liyuting1010/kms-exec#readme",
+  "dependencies": {
+    "aws-sdk": "^2.686.0"
+  }
+}
