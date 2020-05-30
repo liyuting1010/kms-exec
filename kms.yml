@@ -1,0 +1,60 @@
+Description: 'KMS'
+Parameters:
+  KeyName:
+    Type: String
+    Description: Key Name
+    Default: 'yutingli-test-key'
+Resources:
+  KeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName:
+        Fn::Join:
+          - "/"
+          - - alias
+            - !Ref KeyName
+      TargetKeyId: !Ref KmsKey
+  KmsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Enabled: true
+      EnableKeyRotation: false
+      KeyPolicy:
+        Id: key-policy
+        Version: '2012-10-17'
+        Statement:
+          - Sid: Allow use of the key
+            Effect: Allow
+            Principal:
+              AWS:
+                - "*"
+            Action:
+              - kms:Encrypt
+              - kms:Decrypt
+              - kms:ReEncrypt*
+              - kms:GenerateDataKey*
+              - kms:DescribeKey
+            Resource: "*"
+          - Sid: Allow administration the key
+            Effect: Allow
+            Principal:
+              AWS:
+                - "arn:aws:iam::494526681395:user/yuting.li"
+            Action:
+              - kms:Create*
+              - kms:Describe*
+              - kms:Enable*
+              - kms:List*
+              - kms:Put*
+              - kms:Update*
+              - kms:Revoke*
+              - kms:Disable*
+              - kms:Get*
+              - kms:Delete*
+              - kms:ScheduleKeyDeletion
+              - kms:CancelKeyDeletion
+            Resource: "*"
+Outputs:
+  kmsKeyId:
+    Description: The ID of the KMS key
+    Value: !Ref KmsKey

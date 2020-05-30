@@ -1,0 +1,19 @@
+#! /bin/bash -eu
+
+STACK_NAME=$1
+AWS_REGION=ap-southeast-1
+
+#Create a stack for KMS key
+aws cloudformation deploy \
+    --stack-name ${STACK_NAME} \
+    --template-file kms.yml \
+    --no-fail-on-empty-changeset \
+    --capabilities CAPABILITY_NAMED_IAM \
+    --profile aws-training-profile \
+    --region ap-southeast-1
+
+#Output KMS key
+aws cloudformation describe-stacks \
+    --stack-name ${STACK_NAME} \
+    --profile aws-training-profile \
+    --region ap-southeast-1
